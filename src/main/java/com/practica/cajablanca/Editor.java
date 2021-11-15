@@ -15,7 +15,7 @@ public class Editor {
 
 	@SuppressWarnings("unchecked")
 	public Editor() {
-		editor = new SingleLinkedListImpl<AbstractSingleLinkedListImpl<String>>();
+		editor = new SingleLinkedListImpl<>();
 	}
 
 	/**
@@ -32,10 +32,9 @@ public class Editor {
 
 	/**
 	 * 
-	 * @param linea
 	 * @return la lista correspondiente a la línea pasada como parámetro
 	 * @throws EmptyCollectionException si el editor está vacío
-	 * @throws Si                       el número de línea es incorrecta lanza
+	 * //@throws Si                       el número de línea es incorrecta lanza
 	 *                                  IllegalArgumentException
 	 */
 	public AbstractSingleLinkedListImpl<String> getLinea(int linea) throws EmptyCollectionException {
@@ -52,12 +51,12 @@ public class Editor {
 	 * Leemos un fichero de entrada con líneas de texto que cargaremos en nuestra
 	 * lista de listas "lineas".
 	 * 
-	 * @param nombre del fichero del que leemos
+	 * //@param nombre del fichero del que leemos
 	 */
 	public void leerFichero(String nombreFichero) {
-		File archivo = null;
+		File archivo;
 		FileReader fr = null;
-		BufferedReader br = null;
+		BufferedReader br;
 		String regex = "\\s+|,\\s*|\\.\\s*";
 		try {
 			// Apertura del fichero y creacion de BufferedReader para poder
@@ -70,7 +69,7 @@ public class Editor {
 			String cadena;
 			while ((cadena = br.readLine()) != null) {
 				String[] words = cadena.split(regex);
-				lista = new SingleLinkedListImpl<String>();
+				lista = new SingleLinkedListImpl<>();
 				for (String s : words) {
 					lista.addLast(s);
 				}
@@ -103,28 +102,29 @@ public class Editor {
 	 * @throws IllegalArgumentException si inicio es &lt; 0 or fin &gt; size
 	 */
 	@SuppressWarnings("unchecked")
-	public int numPalabras(int inicio, int fin, String palabra) {
-		if (inicio <= 0)
-			throw new IllegalArgumentException("La línea de inicio no puede ser menor o igual a cero");
-		if (fin > this.editor.size())
-			throw new IllegalArgumentException("La línea fin no puede ser mayor que el máximo de líneas");
-		int apariciones = 0;
-		if (this.editor.size() > 0) {
-			while (inicio < fin) {
-				this.lista = this.editor.getAtPos(inicio);
-				int pos = 1;
-				while (pos <= this.lista.size()) {
-					String cadena = this.lista.getAtPos(pos);
-					if (cadena.equals(palabra)) {
-						apariciones++;
-					}
-					pos++;
-				}
-				inicio++;
-			}
-		}
-		return apariciones;
-	}
+
+	/* 1 */		public int numPalabras(int inicio, int fin, String palabra) {
+	/* 2 */			if (inicio <= 0)
+	/* 3 */				throw new IllegalArgumentException("La línea de inicio no puede ser menor o igual a cero");
+	/* 4 */			if (fin > this.editor.size())
+	/* 5 */				throw new IllegalArgumentException("La línea fin no puede ser mayor que el máximo de líneas");
+	/* 6 */			int apariciones = 0;
+	/* 7 */			if (this.editor.size() > 0) {
+	/* 8 */				while (inicio < fin) {
+	/* 9 */					this.lista = this.editor.getAtPos(inicio);
+	/* 10 */				int pos = 1;
+	/* 11 */				while (pos <= this.lista.size()) {
+	/* 12 */					String cadena = this.lista.getAtPos(pos);
+	/* 13 */					if (cadena.equals(palabra)) {
+	/* 14 */						apariciones++;
+	/* 15 */					}
+	/* 16 */					pos++;
+	/* 17 */				}
+	/* 18 */			inicio++;
+	/* 19 */			}
+	/* 20 */		}
+	/* 21 */		return apariciones;
+	/* 22 */	}
 
 	public int numPalabras() throws EmptyCollectionException {
 		if (this.editIsEmpty()) {
@@ -149,52 +149,54 @@ public class Editor {
 	 * @return la palabra de mayor longitud
 	 * @throws EmptyCollectionException
 	 */
-	public String mayorLongitud() throws EmptyCollectionException {
-		String mayor = null;
-		if (this.editor.size() > 0) {
-			for (int i = 1; i <= this.editor.size(); i++) {
-				this.lista = this.editor.getAtPos(i);
-				for (int pos = 1; pos <= this.lista.size(); pos++) {
-					String cadena = this.lista.getAtPos(pos);
-					if (mayor == null) {
-						mayor = cadena;
-					} else if (cadena.length() > mayor.length()) {
-						mayor = cadena;
-					}
-				}
-			}
-		}
-		return mayor;
-	}
+
+	/* 1 */			public String mayorLongitud() throws EmptyCollectionException {
+	/* 2 */				String mayor = null;
+	/* 3 */				if (this.editor.size() > 0) {
+	/* 4 */					for (int i = 1; i <= this.editor.size(); i++) {
+	/* 5 */						this.lista = this.editor.getAtPos(i);
+	/* 6 */						for (int pos = 1; pos <= this.lista.size(); pos++) {
+	/* 7 */							String cadena = this.lista.getAtPos(pos);
+	/* 8 */							if (mayor == null) {
+	/* 9 */								mayor = cadena;
+	/* 10 */						} else if (cadena.length() > mayor.length()) {
+	/* 11 */							mayor = cadena;
+	/* 12 */						}
+	/* 13 */					}
+	/* 14 */				}
+	/* 15 */			}
+	/* 16 */			return mayor;
+	/* 17 */		}
 
 	/**
 	 * @param palabra
 	 * @param nuevaPalabra Sustituye palabra por nuevapalabra a lo largo de todo el
 	 *                     texto
 	 */
-	public void sustituirPalabra(String palabra, String nuevaPalabra) {
-		if (this.editor.size() > 0) {
-			AbstractSingleLinkedListImpl<AbstractSingleLinkedListImpl<String>> nuevoEditor = 
-					new SingleLinkedListImpl<AbstractSingleLinkedListImpl<String>>();
-			int i=1;
-			do {
-				AbstractSingleLinkedListImpl<String> aux = new SingleLinkedListImpl<String>();
-				this.lista = this.editor.getAtPos(i);
-				int j=1;
-				while (j<=this.lista.size()) {
-					if (this.lista.getAtPos(j).equals(palabra)) {
-						aux.addLast(nuevaPalabra);
-					}else {
-						aux.addLast(this.lista.getAtPos(j));
-					}
-					j++;
-				}
-				nuevoEditor.addLast(aux);
-				i++;
-			}while (i<=this.editor.size());
-			editor = nuevoEditor;
-		}
-	}
+
+	/* 1 */			public void sustituirPalabra(String palabra, String nuevaPalabra) {
+	/* 2 */				if (this.editor.size() > 0) {
+	/* 3 */					AbstractSingleLinkedListImpl<AbstractSingleLinkedListImpl<String>> nuevoEditor =
+	/* 4 */                            new SingleLinkedListImpl<>();
+	/* 5 */					int i=1;
+	/* 6 */					do {
+	/* 7 */						AbstractSingleLinkedListImpl<String> aux = new SingleLinkedListImpl<String>();
+	/* 8 */						this.lista = this.editor.getAtPos(i);
+	/* 9 */						int j=1;
+	/* 10 */					while (j<=this.lista.size()) {
+	/* 11 */						if (this.lista.getAtPos(j).equals(palabra)) {
+	/* 12 */							aux.addLast(nuevaPalabra);
+	/* 13 */						}else {
+	/* 14 */							aux.addLast(this.lista.getAtPos(j));
+	/* 15 */						}
+	/* 16 */						j++;
+	/* 17 */					}
+	/* 18 */					nuevoEditor.addLast(aux);
+	/* 19 */					i++;
+	/* 20 */				}while (i<=this.editor.size());
+	/* 21 */				editor = nuevoEditor;
+	/* 22 */				}
+	/* 23 */		}
 
 	public static void main(String[] args) throws EmptyCollectionException {
 	
