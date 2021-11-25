@@ -18,6 +18,7 @@ public class Editor {
 		editor = new SingleLinkedListImpl<>();
 	}
 
+
 	/**
 	 * 
 	 * @return el tamaño de la lista
@@ -199,6 +200,7 @@ public class Editor {
 	/* 23 */		}
 
 	public static void main(String[] args) throws EmptyCollectionException {
+
 	
 	}
 }
