@@ -10,8 +10,8 @@ public class PruebasSustituirPalabra {
     Editor editor= new Editor();
 
     @Test
-    @DisplayName("SustituirPalabraPrueba1")
-    public void SustituirPalabraPrueba1()  {
+    @DisplayName("SustituirPalabraPruebaCamino1")
+    public void SustituirPalabraPruebaCamino1()  {
         boolean tamanioEditor= editor.editIsEmpty();
         assertTrue(tamanioEditor);
     }
@@ -20,8 +20,8 @@ public class PruebasSustituirPalabra {
     ya que j inicialmente vale 1 y this.lista no puede estar vacia */
 
     @Test
-    @DisplayName("SustituirPalabraPrueba3")
-    public void SustituirPalabraPrueba3() throws EmptyCollectionException {
+    @DisplayName("SustituirPalabraPruebaCamino3")
+    public void SustituirPalabraPruebaCamino3() throws EmptyCollectionException {
 
         editor.leerFichero("ficheros/PruebasSustituirPalabra-Prueba3.txt");
 
@@ -32,8 +32,8 @@ public class PruebasSustituirPalabra {
     }
 
     @Test
-    @DisplayName("SustituirPalabraPrueba4")
-    public void SustituirPalabraPrueba4() throws EmptyCollectionException {
+    @DisplayName("SustituirPalabraPruebaCamino4")
+    public void SustituirPalabraPruebaCamino4() throws EmptyCollectionException {
 
         editor.leerFichero("ficheros/PruebasSustituirPalabra-Prueba4.txt");
 
