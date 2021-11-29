@@ -57,5 +57,4 @@ public class PruebasNumPalabras {
         int h = prueba.numPalabras(1,2,"hola");
         assertEquals(1,h);
     }
-
 }

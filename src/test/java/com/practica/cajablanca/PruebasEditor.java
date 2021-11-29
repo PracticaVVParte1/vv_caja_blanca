@@ -50,14 +50,14 @@ public class PruebasEditor {
 
     /* Probamos que la funcion numPalabras() funciona correctamente*/
     @Test
-    @DisplayName("PruebaNumPalabrasVacio1")
-    public void PruebaNumPalabrasVacio1() {
+    @DisplayName("PruebaNumPalabrasSinParam1")
+    public void PruebaNumPalabrasSinParam1() {
         assertThrows(EmptyCollectionException.class, () -> editor.numPalabras());
     }
 
     @Test
-    @DisplayName("PruebaNumPalabrasVacio2")
-    public void PruebaNumPalabrasVacio2() throws EmptyCollectionException {
+    @DisplayName("PruebaNumPalabrasSinParam2")
+    public void PruebaNumPalabrasSinParam2() throws EmptyCollectionException {
         editor.leerFichero("ficheros/PruebasEditor-Pruebas.txt" );
         assertEquals(1, editor.numPalabras());
     }
