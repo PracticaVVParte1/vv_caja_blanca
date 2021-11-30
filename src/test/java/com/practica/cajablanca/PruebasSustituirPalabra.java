@@ -4,6 +4,9 @@ import com.cajanegra.EmptyCollectionException;
 import com.cajanegra.SingleLinkedListImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.plaf.basic.BasicDirectoryModel;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PruebasSustituirPalabra {
@@ -12,8 +15,8 @@ public class PruebasSustituirPalabra {
     @Test
     @DisplayName("SustituirPalabraPruebaCamino1")
     public void SustituirPalabraPruebaCamino1()  {
-        boolean tamanioEditor= editor.editIsEmpty();
-        assertTrue(tamanioEditor);
+        editor.sustituirPalabra("hola", "adios");
+        assertTrue(editor.editIsEmpty());
     }
 
     /* La prueba del camino 2 no se puede probar ya que this.lista.size no puede ser menor que j,
